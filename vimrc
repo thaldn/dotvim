@@ -2,6 +2,25 @@ if has("syntax")
 	syntax enable
 endif
 set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+"
+""call vundle#begin('~/some/path/here')
+" let Vundle manage Vundle, required
+" install Vundle bundles
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+  source ~/.vimrc.bundles.local
+endif
+
+call vundle#end()
+
+"detect file type
+filetype on
+filetype plugin indent on
+
 set encoding=utf-8
 
 set ts=4
@@ -16,10 +35,6 @@ set incsearch
 
 set ignorecase
 set smartcase
-
-"detect file type
-filetype on
-filetype plugin on
 
 "reopen a file
 if has("autocmd")
@@ -36,6 +51,7 @@ endif
 au FileType c,cpp :set cindent
 map #i ^I#include <$a> 
 map! #i ^I#include <$a> 
+nmap <f7> :make<CR>
 
 set autoread
 set cursorline
