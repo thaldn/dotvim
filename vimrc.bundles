@@ -1,4 +1,6 @@
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rust-lang/rust.vim'
+Plugin 'fatih/vim-go'
+Plugin 'vim-scripts/Tagbar'
 Plugin 'ycm-core/YouCompleteMe'
