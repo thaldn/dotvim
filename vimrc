@@ -23,9 +23,7 @@ filetype plugin indent on
 
 set encoding=utf-8
 
-set ts=4
-set sw=4
-set st=4
+set ts=4 sw=4 st=4
 
 set autoindent
 set smartindent
