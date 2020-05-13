@@ -38,6 +38,9 @@ set smartcase
 if has("autocmd")
 	au BufreadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exec "normal! g'\"" | endif
 	au BufWritePost .vimrc source $MYVIMRC
+	au FileType ruby,javascript setlocal ts=2 sts=2 sw=2 et
+	au FileType python,ruby setlocal st=2 sw=2 ts=2 et
+	au FileType c,cpp :set cindent
 endif
 
 let mapleader = ","
@@ -48,8 +51,6 @@ else
 	noremap <leader>e :e <C-R>=expand("%:p:h") . "\\" <CR>
 endif
 
-au FileType c,cpp :set cindent
-au FileType python,ruby :set st=2 sw=2 ts=2 et
 map #i ^I#include <$a> 
 map! #i ^I#include <$a> 
 nmap <f7> :make<CR>
@@ -114,17 +115,65 @@ nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+"======go setting=======
+let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+let g:go_autodetect_gopath = 0
+let g:go_list_type = "quickfix"
+let g:go_version_warning = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_generate_tags = 1
+let g:godef_split=2
+
 "=====nerdtree====
 map <F2> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.o$','\.ko$', '\.so$', '\.a$', '\.swp$', '\.bak$', '\~$']
 let NERDTreeMininalUI=1
 let NERDTreeQuitOnOpen=1
+"设置宽度
+"let NERDTreeWinSize=25
+
+"=====tagbar======
+nmap <F3> :TagbarToggle<CR>
+let g:tagbar_width=25
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
 
 "=====edit macros=====
-imap{ {}<ESC>i<CR><ESC>O
+"imap{ {}<ESC>i<CR><ESC>O
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
-" inoremap { {}<ESC>i
+inoremap { {}<ESC>i
 inoremap < <><ESC>i
 inoremap ‘ ’‘<ESC>i
 inoremap " ""<ESC>i
