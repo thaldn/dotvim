@@ -23,7 +23,7 @@ filetype plugin indent on
 
 set encoding=utf-8
 
-set ts=4 sw=4 st=4 noexpandtab
+set ts=4 sw=4 st=4 noet
 
 set autoindent
 set smartindent
@@ -37,7 +37,7 @@ set smartcase
 "reopen a file
 if has("autocmd")
 	au BufreadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exec "normal! g'\"" | endif
-	filetype plugin indent on
+	au BufWritePost .vimrc source $MYVIMRC
 endif
 
 let mapleader = ","
@@ -49,6 +49,7 @@ else
 endif
 
 au FileType c,cpp :set cindent
+au FileType python,ruby :set st=2 sw=2 ts=2 et
 map #i ^I#include <$a> 
 map! #i ^I#include <$a> 
 nmap <f7> :make<CR>
@@ -57,9 +58,10 @@ set autoread
 set cursorline
 
 "=====ycm for rust=====
-"cargo install --git https://github.com/kings-way/racerd
+""语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_collect_identifiers_from_tags_files=1
+""开启 YCM 基于标签引擎
+"let g:ycm_collect_identifiers_from_tag_files = 1
 "let g:ycm_goto_buffer_command='horizontal-split'    " horizontal split the window when 'goto' another location
 "let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py'
 "set completeopt=menu,menuone                        " disable the function definition preview window
@@ -86,16 +88,11 @@ let g:ycm_rust_src_path = '/home/jicui/.rustup/toolchains/stable-x86_64-unknown-
 "let g:ycm_key_list_previous_completion = ['<Up>']
 ""
 "let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-""开启 YCM 基于标签引擎
-"let g:ycm_collect_identifiers_from_tag_files = 1
 ""从第2个键入字符就开始罗列匹配项
 "let g:ycm_min_num_of_chars_for_completion=2
 ""禁止缓存匹配项,每次都重新生成匹配项
 "let g:ycm_cache_omnifunc=0
-""语法关键字补全
-"let g:ycm_seed_identifiers_with_syntax = 1
 "let g:ycm_confirm_extra_conf=0
-"let g:ycm_key_invoke_completion = '<C-/>'
 ""在接受补全后不分裂出一个窗口显示接受项
 "set completeopt-=preview
 ""force recomile with syntastic
@@ -122,3 +119,23 @@ map <F2> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.o$','\.ko$', '\.so$', '\.a$', '\.swp$', '\.bak$', '\~$']
 let NERDTreeMininalUI=1
 let NERDTreeQuitOnOpen=1
+
+"=====edit macros=====
+imap{ {}<ESC>i<CR><ESC>O
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+" inoremap { {}<ESC>i
+inoremap < <><ESC>i
+inoremap ‘ ’‘<ESC>i
+inoremap " ""<ESC>i
+inoremap ` ``<ESC>i
+" cscope
+nmap <leader><Space>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><Space>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><Space>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><Space>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><Space>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><Space>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <leader><Space>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <leader><Space>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><Space>a :cs find a <C-R>=expand("<cword>")<CR><CR>
