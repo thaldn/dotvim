@@ -34,8 +34,8 @@ set incsearch
 set ignorecase
 set smartcase
 
-"reopen a file
 if has("autocmd")
+	"reopen a file
 	au BufreadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exec "normal! g'\"" | endif
 	au BufWritePost .vimrc source $MYVIMRC
 	au FileType ruby,javascript setlocal ts=2 sts=2 sw=2 et
@@ -51,9 +51,16 @@ else
 	noremap <leader>e :e <C-R>=expand("%:p:h") . "\\" <CR>
 endif
 
-map #i ^I#include <$a> 
-map! #i ^I#include <$a> 
-nmap <f7> :make<CR>
+augroup vimrc_filetype
+	au!
+	au FileType c,cpp call s:MyCSettings()
+augroup end
+
+function! s:MyCSettings()
+	inoremap #in <C-O>^#include <<C-O>$>
+	"map! #i ^I#include <$a> 
+	nmap <f7> :make<CR>
+endfunction
 
 set autoread
 set cursorline
@@ -61,6 +68,7 @@ set cursorline
 "=====ycm for rust=====
 ""语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_autoclose_preview_window_after_completion=1
 ""开启 YCM 基于标签引擎
 "let g:ycm_collect_identifiers_from_tag_files = 1
 "let g:ycm_goto_buffer_command='horizontal-split'    " horizontal split the window when 'goto' another location
@@ -88,7 +96,6 @@ let g:ycm_rust_src_path = '/home/jicui/.rustup/toolchains/stable-x86_64-unknown-
 "let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion = ['<Up>']
 ""
-"let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 ""从第2个键入字符就开始罗列匹配项
 "let g:ycm_min_num_of_chars_for_completion=2
 ""禁止缓存匹配项,每次都重新生成匹配项
