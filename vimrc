@@ -21,6 +21,7 @@ call vundle#end()
 filetype on
 filetype plugin indent on
 
+set termencoding=utf-8
 set encoding=utf-8
 
 set ts=4 sw=4 st=4 noet
@@ -44,6 +45,7 @@ if has("autocmd")
 endif
 
 let mapleader = ","
+noremap \ ,
 
 if has("unix")
 	noremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -58,6 +60,7 @@ augroup end
 
 function! s:MyCSettings()
 	inoremap #in <C-O>^#include <<C-O>$>
+	imap{ {}<ESC>i<CR><ESC>O
 	"map! #i ^I#include <$a> 
 	nmap <f7> :make<CR>
 endfunction
@@ -177,7 +180,6 @@ let g:tagbar_type_go = {
 \ }
 
 "=====edit macros=====
-"imap{ {}<ESC>i<CR><ESC>O
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
 inoremap { {}<ESC>i
