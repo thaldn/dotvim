@@ -2,24 +2,30 @@ if has("syntax")
 	syntax enable
 endif
 set nocompatible
-filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-"
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+"filetype off
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
 ""call vundle#begin('~/some/path/here')
 " let Vundle manage Vundle, required
 " install Vundle bundles
+call plug#begin('~/.vim/bundle')
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
   source ~/.vimrc.bundles.local
 endif
 
-call vundle#end()
-
+"call vundle#end()
 "detect file type
-filetype on
-filetype plugin indent on
+"filetype on
+"filetype plugin indent on
+call plug#end()
 
 set termencoding=utf-8
 set encoding=utf-8
@@ -187,6 +193,19 @@ inoremap < <><ESC>i
 inoremap ‘ ’‘<ESC>i
 inoremap " ""<ESC>i
 inoremap ` ``<ESC>i
+
+"======gtags======
+set cscopetag
+set cscopeprg='gtags-cscope'
+let GtagsCscope_Auto_Load = 1
+let GtagsCscope_Auto_Map = 1
+let GtagsCscope_Quiet = 1
+
+let gtags_file=findfile("GTAGS", ";")
+if !empty(gtags_file)
+	exec "cs add" gtags_file
+endif
+
 " cscope
 nmap <leader><Space>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <leader><Space>g :cs find g <C-R>=expand("<cword>")<CR><CR>

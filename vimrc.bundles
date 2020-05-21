@@ -1,6 +1,10 @@
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'rust-lang/rust.vim'
-Plugin 'fatih/vim-go'
-Plugin 'vim-scripts/Tagbar'
-Plugin 'ycm-core/YouCompleteMe'
+"Plugin 'VundleVim/Vundle.vim'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'rust-lang/rust.vim'
+Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'vim-scripts/Tagbar'
+Plug 'vim-scripts/gtags.vim'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'tpope/vim-fugitive'
+"comment out if need the help for vim-plug itself
+"Plug 'junegunn/vim-plug'
