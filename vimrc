@@ -48,6 +48,7 @@ if has("autocmd")
 	au FileType ruby,javascript setlocal ts=2 sts=2 sw=2 et
 	au FileType python,ruby setlocal st=2 sw=2 ts=2 et
 	au FileType c,cpp :set cindent
+	au BufWritePre *.rs :RustFmt
 endif
 
 let mapleader = ","
@@ -108,8 +109,8 @@ let g:ycm_rust_src_path = '/home/jicui/.rustup/toolchains/stable-x86_64-unknown-
 ""从第2个键入字符就开始罗列匹配项
 "let g:ycm_min_num_of_chars_for_completion=2
 ""禁止缓存匹配项,每次都重新生成匹配项
-"let g:ycm_cache_omnifunc=0
-"let g:ycm_confirm_extra_conf=0
+let g:ycm_cache_omnifunc=0
+let g:ycm_confirm_extra_conf=0
 ""在接受补全后不分裂出一个窗口显示接受项
 "set completeopt-=preview
 ""force recomile with syntastic
@@ -207,12 +208,14 @@ if !empty(gtags_file)
 endif
 
 " cscope
-nmap <leader><Space>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <leader><Space>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <leader><Space>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <leader><Space>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <leader><Space>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <leader><Space>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <leader><Space>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <leader><Space>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-nmap <leader><Space>a :cs find a <C-R>=expand("<cword>")<CR><CR>
+if executable('cscope')
+	nmap <leader><Space>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+	nmap <leader><Space>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+	nmap <leader><Space>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+	nmap <leader><Space>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+	nmap <leader><Space>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+	nmap <leader><Space>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+	nmap <leader><Space>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	nmap <leader><Space>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+	nmap <leader><Space>a :cs find a <C-R>=expand("<cword>")<CR><CR>
+endif

@@ -2,7 +2,7 @@
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'tag': '*' }
-Plug 'vim-scripts/Tagbar'
+Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/gtags.vim'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'tpope/vim-fugitive'
