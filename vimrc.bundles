@@ -2,9 +2,18 @@
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'tag': '*' }
-Plug 'majutsushi/tagbar'
+"Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/gtags.vim'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'tpope/vim-fugitive'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'dense-analysis/ale'
+Plug 'Yggdroot/LeaderF'
+"Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'tpope/unimpaired'
+"Plug 'Shaogo/echodoc.vim'
+"Plug 'justinmk/vim-dirvish'
+"
 "comment out if need the help for vim-plug itself
 "Plug 'junegunn/vim-plug'
